@@ -1,117 +1,143 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+// src/App.js
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer,
-} from "recharts";
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+} from 'recharts';
 
-const API = "http://localhost:8000";
+const BASE_URL = 'http://localhost:8000';
 
-export default function App() {
-  const [token, setToken] = useState("");
-  const [role, setRole] = useState("");
-  const [taskData, setTaskData] = useState([]);
+function App() {
+  const [token, setToken] = useState('');
+  const [role, setRole] = useState('');
+  const [username, setUsername] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [tasks, setTasks] = useState([]);
+  const [taskFilter, setTaskFilter] = useState('a');
   const [reportData, setReportData] = useState([]);
-  const [selectedTask, setSelectedTask] = useState("a");
 
-  const login = async (username, password) => {
-    const res = await axios.post(`${API}/login`,
-      new URLSearchParams({ username, password }),
-      { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
-    );
-    setToken(res.data.access_token);
-    const payload = JSON.parse(atob(res.data.access_token.split('.')[1]));
-    setRole(payload.role);
+  const [loginForm, setLoginForm] = useState({
+    username: '',
+    password: ''
+  });
+
+  const handleLogin = async () => {
+    try {
+      const form = new URLSearchParams();
+      form.append('username', loginForm.username);
+      form.append('password', loginForm.password);
+
+      const response = await axios.post(`${BASE_URL}/login`, form, {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      });
+
+      setToken(response.data.access_token);
+      setUsername(loginForm.username);
+
+      const decoded = JSON.parse(atob(response.data.access_token.split('.')[1]));
+      setRole(decoded.role);
+      setLoginError('');
+    } catch (err) {
+      setLoginError('Invalid credentials. Please try again.');
+    }
   };
 
   const fetchTasks = async () => {
-    const res = await axios.get(`${API}/tasks/${selectedTask}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setTaskData(res.data);
+    try {
+      const response = await axios.get(`${BASE_URL}/tasks/${taskFilter}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setTasks(response.data);
+    } catch (err) {
+      console.error('Failed to fetch tasks', err);
+    }
   };
 
   const fetchReport = async () => {
-    const res = await axios.get(`${API}/report/${selectedTask}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setReportData(res.data.report);
+    try {
+      const response = await axios.get(`${BASE_URL}/report/${taskFilter}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setReportData(response.data.report);
+    } catch (err) {
+      console.error('Failed to fetch report', err);
+    }
   };
 
   useEffect(() => {
     if (token) {
       fetchTasks();
-      if (role === "admin") fetchReport();
-      const interval = setInterval(() => {
-        fetchTasks();
-        if (role === "admin") fetchReport();
-      }, 5000);
-      return () => clearInterval(interval);
+      fetchReport();
     }
-  }, [token, role, selectedTask]);
+  }, [token, taskFilter]);
+
+  if (!token) {
+    return (
+      <div style={{ padding: '40px' }}>
+        <h2>Login</h2>
+        <input
+          type="text"
+          placeholder="Username"
+          value={loginForm.username}
+          onChange={(e) => setLoginForm({ ...loginForm, username: e.target.value })}
+        />
+        <br />
+        <input
+          type="password"
+          placeholder="Password"
+          value={loginForm.password}
+          onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
+        />
+        <br />
+        <button onClick={handleLogin}>Login</button>
+        {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
+      </div>
+    );
+  }
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial" }}>
-      <h2>🧠 Role-Based Dashboard Monitoring</h2>
+    <div style={{ padding: '30px' }}>
+      <h2>Welcome, {username} ({role})</h2>
+      <label>Select Task: </label>
+      <select value={taskFilter} onChange={(e) => setTaskFilter(e.target.value)}>
+        <option value="a">Task A</option>
+        <option value="b">Task B</option>
+        <option value="c">Task C</option>
+      </select>
 
-      {!token ? (
-        <div>
-          <p><strong>Login:</strong></p>
-          <button onClick={() => login("admin", "admin123")}>Login as Admin</button>{" "}
-          <button onClick={() => login("employee", "emp123")}>Login as Employee</button>
-        </div>
-      ) : (
-        <div>
-          <p>✅ Logged in as <strong>{role}</strong></p>
+      <h3>Task List</h3>
+      <table border="1" cellPadding="8" style={{ borderCollapse: 'collapse' }}>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks.map((task) => (
+            <tr key={task.id}>
+              <td>{task.id}</td>
+              <td>{task.description}</td>
+              <td>{task.status}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
-          <div style={{ margin: "20px 0" }}>
-            <label>Select Task: </label>
-            <select
-              value={selectedTask}
-              onChange={(e) => setSelectedTask(e.target.value)}
-            >
-              <option value="a">Task A</option>
-              <option value="b">Task B</option>
-              <option value="c">Task C</option>
-            </select>
-          </div>
-
-          <h3>📋 Task Data (Task {selectedTask.toUpperCase()})</h3>
-          <table border="1" cellPadding="10">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Description</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {taskData.map((row) => (
-                <tr key={row.id}>
-                  <td>{row.id}</td>
-                  <td>{row.description}</td>
-                  <td>{row.status}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          {role === "admin" && (
-            <div style={{ marginTop: 30 }}>
-              <h3>📊 Report Summary</h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={reportData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="status" />
-                  <YAxis allowDecimals={false} />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="count" fill="#8884d8" />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          )}
-        </div>
-      )}
+      <h3>Report</h3>
+      <ResponsiveContainer width="60%" height={300}>
+        <BarChart data={reportData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="status" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="count" fill="#8884d8" />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 }
+
+export default App;

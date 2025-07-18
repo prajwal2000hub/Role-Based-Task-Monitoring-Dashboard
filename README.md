@@ -12,7 +12,7 @@ This project is designed to handle task management with clear role-based access 
 Some key features of the application include secure JWT-based login, separate task tables for Task A, B, and C, role-based views, and a report section with graphs. Admins can use these graphs to track performance across different tasks.
 
 # Technology Stack
-I’ve used FastAPI for the backend, React with Axios for the frontend, and Recharts for data visualization. SQLite is used for data storage. Everything is containerized with Docker, making the app easy to deploy.
+I’ve used FastAPI for the backend, React with Axios for the frontend, and Recharts for data visualization. SQLite is used for data storage. 
 
 # How It Works
 The app begins with a login screen. Once logged in, Employees see only their tasks—marked as 'Pending' or 'Completed'. Admins can view every task across all users and use filters to generate reports. The UI is simple and updates data in near real-time.

@@ -19,3 +19,6 @@ The app begins with a login screen. Once logged in, Employees see only their tas
 
 # Conclusion
 This system solves the problem of task visibility in role-based teams. It’s scalable—you can add more users or tasks easily. The separation of access ensures security, while graphs give a clear visual of progress. It’s a great fit for small-to-medium teams or internal dashboards.
+
+# Table Structure
+<img width="1473" height="645" alt="image" src="https://github.com/user-attachments/assets/908a946b-1d81-4888-9d4a-1bdf00e7b71e" />

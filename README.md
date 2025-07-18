@@ -22,3 +22,28 @@ This system solves the problem of task visibility in role-based teams. It’s sc
 
 # Table Structure
 <img width="1473" height="645" alt="image" src="https://github.com/user-attachments/assets/908a946b-1d81-4888-9d4a-1bdf00e7b71e" />
+
+# Swagger UI
+<img width="1752" height="958" alt="image" src="https://github.com/user-attachments/assets/1a782530-2959-447d-8a1a-077e4ab9a149" />
+
+# Login API-Endpoint
+<img width="905" height="927" alt="image" src="https://github.com/user-attachments/assets/1b4605b5-7f76-4aef-b7ff-de5aabf9eff1" />
+
+# Tasks API-Endpoint
+<img width="914" height="629" alt="image" src="https://github.com/user-attachments/assets/e16f3075-75ae-4d6a-8543-4739b2427940" />
+
+# Report API-Endpoint
+<img width="901" height="623" alt="image" src="https://github.com/user-attachments/assets/91ad3a16-d938-4353-a1db-557b405f1c57" />
+
+# Login UI
+<img width="774" height="323" alt="image" src="https://github.com/user-attachments/assets/0d5392fd-c41b-4721-b196-394bb960e179" />
+
+# Admin UI
+<img width="1909" height="934" alt="image" src="https://github.com/user-attachments/assets/74bc3f61-8b31-4b3b-be47-89744635a65f" />
+
+# Employee UI
+
+
+
+
+

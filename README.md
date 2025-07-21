@@ -30,18 +30,12 @@ This system solves the problem of task visibility in role-based teams. It’s sc
 # Login API-Endpoint
 <img width="905" height="927" alt="image" src="https://github.com/user-attachments/assets/1b4605b5-7f76-4aef-b7ff-de5aabf9eff1" />
 
-# Tasks API-Endpoint
+# Tasks Logs API-Endpoint
 <img width="914" height="629" alt="image" src="https://github.com/user-attachments/assets/e16f3075-75ae-4d6a-8543-4739b2427940" />
 
-# Report API-Endpoint
-<img width="901" height="623" alt="image" src="https://github.com/user-attachments/assets/91ad3a16-d938-4353-a1db-557b405f1c57" />
+# Robots Task Logs with task status distribtion chart UI
+<img width="908" height="751" alt="image" src="https://github.com/user-attachments/assets/4a23b678-b4bc-4a7d-bbd9-58e8d6a7b5b6" />
 
-# Admin UI
-<img width="1887" height="769" alt="image" src="https://github.com/user-attachments/assets/20165779-bc39-4041-8e56-cf60c7911144" />
-
-
-# Employee UI
-<img width="1890" height="618" alt="image" src="https://github.com/user-attachments/assets/31b8c516-93b8-4cd2-b8a5-2dce33a7166c" />
 
 
 

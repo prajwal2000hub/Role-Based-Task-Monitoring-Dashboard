@@ -15,16 +15,17 @@ Some key features of the application include secure JWT-based login, separate ta
 I’ve used FastAPI for the backend, React with Axios for the frontend, and Recharts for data visualization. SQLite is used for data storage. 
 
 # How It Works
-The app begins with a login screen. Once logged in, Employees see only their tasks—marked as 'Pending' or 'Completed'. Admins can view every task across all users and use filters to generate reports. The UI is simple and updates data in near real-time.
+The app begins with a login screen. Once logged in, Employees see only their tasks—marked as 'Pending', 'in_progress' and 'Completed'. Admins can view every task across all users and use filters to generate reports. The UI is simple and updates data in near real-time.
 
 # Conclusion
 This system solves the problem of task visibility in role-based teams. It’s scalable—you can add more users or tasks easily. The separation of access ensures security, while graphs give a clear visual of progress. It’s a great fit for small-to-medium teams or internal dashboards.
 
 # Table Structure
-<img width="1473" height="645" alt="image" src="https://github.com/user-attachments/assets/908a946b-1d81-4888-9d4a-1bdf00e7b71e" />
+
 
 # Swagger UI
-<img width="1752" height="958" alt="image" src="https://github.com/user-attachments/assets/1a782530-2959-447d-8a1a-077e4ab9a149" />
+<img width="1920" height="796" alt="image" src="https://github.com/user-attachments/assets/4c8ed33a-2e07-4b56-b235-bfac29cb0293" />
+
 
 # Login API-Endpoint
 <img width="905" height="927" alt="image" src="https://github.com/user-attachments/assets/1b4605b5-7f76-4aef-b7ff-de5aabf9eff1" />

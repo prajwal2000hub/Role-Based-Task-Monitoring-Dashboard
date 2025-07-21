@@ -21,9 +21,6 @@ The app begins with a login screen. Once logged in, Employees see only their tas
 This system solves the problem of task visibility in role-based teams. It’s scalable—you can add more users or tasks easily. The separation of access ensures security, while graphs give a clear visual of progress. It’s a great fit for small-to-medium teams or internal dashboards.
 
 # Table Structure
-
-
-# Swagger UI
 <img width="1920" height="796" alt="image" src="https://github.com/user-attachments/assets/4c8ed33a-2e07-4b56-b235-bfac29cb0293" />
 
 
